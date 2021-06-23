@@ -1,54 +1,44 @@
-import java.sql.Timestamp;
+import lombok.Data;
+import lombok.SneakyThrows;
 
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.concurrent.ExecutionException;
+
+
+@Data
 public class Cat implements Comparable<Cat>, Cloneable {
 
     private String name;
     private int weight;
-    private Timestamp borningdate;
+    private LocalDateTime birthDate;
 
-    public Cat(String name, int weight, Timestamp borningdate) {
+
+    public Cat(String name, int weight, LocalDateTime birthDate) {
         this.name = name;
         this.weight = weight;
-        this.borningdate = borningdate;
+        this.birthDate = birthDate;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public Timestamp getBorningdate() {
-        return borningdate;
-    }
-
-    public void setBorningdate(Timestamp borningdate) {
-        this.borningdate = borningdate;
-    }
 
     @Override
     public int compareTo(Cat cat) {
         if (this == cat) {
+
             throw new RuntimeException("Cats are equal");
         }
 
-        int nameResult = this.name.compareTo(cat.name);
-       int birthDate = this.borningdate.compareTo(cat.borningdate);
+       int nameResult = this.name.compareTo(cat.name);
+       int birthDate = this.birthDate.compareTo(cat.birthDate);
        int weightResult = this.weight - cat.weight;
-       if(nameResult == 0 && birthDate == 0 && weightResult ==0){
+       if(this.name.compareTo(cat.name) == 0 && this.birthDate.compareTo(cat.birthDate) == 0 && this.weight - cat.weight ==0){
            throw new RuntimeException("Cats are equal");
        }
-       return (nameResult + birthDate + weightResult);
+        return (nameResult + birthDate + weightResult);
     }
 
     @Override
@@ -56,7 +46,14 @@ public class Cat implements Comparable<Cat>, Cloneable {
         return "Cat{" +
                 "name='" + name + '\'' +
                 ", weight=" + weight +
-                ", borningdate=" + borningdate +
+                ", birthDate=" + birthDate +
                 '}';
+    }
+    public static class CatNameComporator implements Comparator<Cat> {
+
+        @Override
+        public int compare(Cat cat1, Cat cat2) {
+            return cat1.compareTo(cat2);
+        }
     }
 }
