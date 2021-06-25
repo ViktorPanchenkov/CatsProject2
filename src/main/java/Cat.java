@@ -28,17 +28,16 @@ public class Cat implements Comparable<Cat>, Cloneable {
     @Override
     public int compareTo(Cat cat) {
         if (this == cat) {
-
-            throw new RuntimeException("Cats are equal");
+            return 0;
         }
 
-       int nameResult = this.name.compareTo(cat.name);
-       int birthDate = this.birthDate.compareTo(cat.birthDate);
-       int weightResult = this.weight - cat.weight;
        if(this.name.compareTo(cat.name) == 0 && this.birthDate.compareTo(cat.birthDate) == 0 && this.weight - cat.weight ==0){
-           throw new RuntimeException("Cats are equal");
+           return 0;
        }
-        return (nameResult + birthDate + weightResult);
+       else {
+           return 1;
+       }
+
     }
 
     @Override
@@ -49,11 +48,5 @@ public class Cat implements Comparable<Cat>, Cloneable {
                 ", birthDate=" + birthDate +
                 '}';
     }
-    public static class CatNameComporator implements Comparator<Cat> {
 
-        @Override
-        public int compare(Cat cat1, Cat cat2) {
-            return cat1.compareTo(cat2);
-        }
-    }
 }
