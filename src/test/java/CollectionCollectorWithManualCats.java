@@ -1,7 +1,8 @@
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 import java.sql.Timestamp;
@@ -18,7 +19,7 @@ public class CollectionCollectorWithManualCats {
     private static final String[] names = {"Vasia","Petya","Kolia","Pola","Laki","Myrka","Bidon","Kurzik","Iris","Kafka"};
 
     List<Cat2WithDate> cats = new ArrayList<>();
-    @Test
+    @org.junit.Test
     public void TestCollectionOnDuplicatedCats(){
      cats.add(duplicated1);
         Random random = new Random();
@@ -61,6 +62,7 @@ public class CollectionCollectorWithManualCats {
 
             cats.add(cat);
         }
+
         cats.add(duplicated2);
         System.err.println(Arrays.toString(cats.toArray()));
         Collections.sort(cats, new Comparator<Cat2WithDate>() {
@@ -79,6 +81,7 @@ public class CollectionCollectorWithManualCats {
             }
 
         }
+
 
         System.out.println(Arrays.toString(cats.toArray()));
 
